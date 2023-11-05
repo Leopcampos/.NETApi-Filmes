@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Filmes.Data.Dtos;
+namespace Filmes.Data.Dtos.Filme;
 
-public class CreateFilmeDto
+public class UpdateFilmeDto
 {
     [Required(ErrorMessage = "O título do filme é obrigatório")]
     [StringLength(50, ErrorMessage = "O título do filme não pode exceder 50 caracteres")]

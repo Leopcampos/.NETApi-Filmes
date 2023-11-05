@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Filmes.Data;
-using Filmes.Data.Dtos;
+using Filmes.Data.Dtos.Filme;
 using Filmes.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Filmes.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class FilmeController : ControllerBase
 {
@@ -94,25 +94,25 @@ public class FilmeController : ControllerBase
     /// <param name="id"></param>
     /// <param name="patch"></param>
     /// <returns></returns>
-    [HttpPatch("{id}")]
-    public IActionResult AtualizaFilmeParcial(int id, JsonPatchDocument<UpdateFilmeDto> patch)
-    {
-        var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
-        if (filme == null) return NotFound();
+    //[HttpPatch("{id}")]
+    //public IActionResult AtualizaFilmeParcial(int id, JsonPatchDocument<UpdateFilmeDto> patch)
+    //{
+    //    var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+    //    if (filme == null) return NotFound();
 
-        var filmeParaAtualizar = _mapper.Map<UpdateFilmeDto>(filme);
+    //    var filmeParaAtualizar = _mapper.Map<UpdateFilmeDto>(filme);
 
-        patch.ApplyTo(filmeParaAtualizar, ModelState);
+    //    patch.ApplyTo(filmeParaAtualizar, ModelState);
 
-        if (!TryValidateModel(filmeParaAtualizar))
-        {
-            return ValidationProblem(ModelState);
-        }
+    //    if (!TryValidateModel(filmeParaAtualizar))
+    //    {
+    //        return ValidationProblem(ModelState);
+    //    }
 
-        _mapper.Map(filmeParaAtualizar, filme);
-        _context.SaveChanges();
-        return NoContent();
-    }
+    //    _mapper.Map(filmeParaAtualizar, filme);
+    //    _context.SaveChanges();
+    //    return NoContent();
+    //}
 
     /// <summary>
     /// Deleta um filme do banco de dados usando seu id
