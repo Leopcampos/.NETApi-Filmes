@@ -6,3 +6,4 @@
 - .NET 6
 
 Link do curso: https://cursos.alura.com.br/course/dotnet-criando-web-api
+Link do curso: https://cursos.alura.com.br/course/dotnet-relacionando-entidades
