@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using Filmes.Data.Dtos.Sessao;
 using Filmes.Data;
+using Filmes.Data.Dtos.Sessao;
 using Filmes.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Filmes.Controllers
@@ -26,7 +25,7 @@ namespace Filmes.Controllers
             Sessao sessao = _mapper.Map<Sessao>(dto);
             _context.Sessoes.Add(sessao);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(RecuperaSessoesPorId), new { Id = sessao.Id }, sessao);
+            return CreatedAtAction(nameof(RecuperaSessoesPorId), new { filmeId = sessao.FilmeId, cinemaId = sessao.CinemaId }, sessao);
         }
 
         [HttpGet]
@@ -35,10 +34,10 @@ namespace Filmes.Controllers
             return _mapper.Map<List<ReadSessaoDto>>(_context.Sessoes.ToList());
         }
 
-        [HttpGet("{id}")]
-        public IActionResult RecuperaSessoesPorId(int id)
+        [HttpGet("{filmeId}/{cinemaId}")]
+        public IActionResult RecuperaSessoesPorId(int filmeId, int cinemaId)
         {
-            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
+            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.FilmeId.Equals(filmeId) && sessao.CinemaId.Equals(cinemaId));
             if (sessao != null)
             {
                 ReadSessaoDto sessaoDto = _mapper.Map<ReadSessaoDto>(sessao);
